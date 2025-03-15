@@ -1,0 +1,35 @@
+{
+  "editor.rulers": [
+    110
+  ],
+  "editor.tabSize": 2,
+  "rubyLsp.rubyVersionManager": {
+    "identifier": "none",
+  },
+  "rubyLsp.indexing": {
+    "excludedGems": [
+      "rubocop",
+      "rubocop-performance"
+    ],
+    "excludedMagicComments": [
+      "compiled:true"
+    ],
+    "excludedPatterns": [],
+    "includedPatterns": [
+      "rake"
+    ]
+  },
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp"
+  },
+  "editor.formatOnSave": true,
+  "[erb]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
+  },
+  "files.associations": {
+    "*.html.erb": "erb"
+  },
+  "vscode-erb-beautify.keepBlankLines": 1,
+  "rubyLsp.formatter": "rubocop_internal"
+}
