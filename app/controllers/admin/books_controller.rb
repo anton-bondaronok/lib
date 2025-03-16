@@ -53,6 +53,6 @@ class Admin::BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:name, :description, :avatar, :genre_id, :author_id)
+      params.require(:book).permit(:name, :description, :avatar, :genre_id, :author_id, book_tags_attributes: [ :id, :tag_id, :_destroy ])
     end
 end

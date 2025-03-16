@@ -33,6 +33,12 @@
     <%= link_to @book.genre.name, admin_genre_path(@book.genre) %>
   </p>
   <p class="my-5">
+    <strong class="block font-medium mb-1">Tags:</strong>
+    <% @book.tags.each do |tag| %>
+      <%= render "tags/tag", tag: tag %>
+    <% end %>
+  </p>
+  <p class="my-5">
     <strong class="block font-medium mb-1">Author:</strong>
     <%= link_to @book.author.full_name, admin_author_path(@book.author) %>
   </p>
