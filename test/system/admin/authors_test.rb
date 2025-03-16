@@ -1,17 +1,17 @@
 require "application_system_test_case"
 
-class AuthorsTest < ApplicationSystemTestCase
+class Admin::AuthorsTest < ApplicationSystemTestCase
   setup do
     @author = authors(:one)
   end
 
   test "visiting the index" do
-    visit authors_url
+    visit admin_authors_url
     assert_selector "h1", text: "Authors"
   end
 
   test "should create author" do
-    visit authors_url
+    visit admin_authors_url
     click_on "New author"
 
     fill_in "Full name", with: @author.full_name
@@ -23,7 +23,7 @@ class AuthorsTest < ApplicationSystemTestCase
   end
 
   test "should update Author" do
-    visit author_url(@author)
+    visit admin_author_url(@author)
     click_on "Edit this author", match: :first
 
     fill_in "Full name", with: @author.full_name
@@ -35,7 +35,7 @@ class AuthorsTest < ApplicationSystemTestCase
   end
 
   test "should destroy Author" do
-    visit author_url(@author)
+    visit admin_author_url(@author)
     click_on "Destroy this author", match: :first
 
     assert_text "Author was successfully destroyed"

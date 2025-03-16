@@ -1,17 +1,17 @@
 require "application_system_test_case"
 
-class TagsTest < ApplicationSystemTestCase
+class Admin::TagsTest < ApplicationSystemTestCase
   setup do
     @tag = tags(:one)
   end
 
   test "visiting the index" do
-    visit tags_url
+    visit admin_tags_url
     assert_selector "h1", text: "Tags"
   end
 
   test "should create tag" do
-    visit tags_url
+    visit admin_tags_url
     click_on "New tag"
 
     fill_in "Name", with: @tag.name
@@ -22,7 +22,7 @@ class TagsTest < ApplicationSystemTestCase
   end
 
   test "should update Tag" do
-    visit tag_url(@tag)
+    visit admin_tag_url(@tag)
     click_on "Edit this tag", match: :first
 
     fill_in "Name", with: @tag.name
@@ -33,7 +33,7 @@ class TagsTest < ApplicationSystemTestCase
   end
 
   test "should destroy Tag" do
-    visit tag_url(@tag)
+    visit admin_tag_url(@tag)
     click_on "Destroy this tag", match: :first
 
     assert_text "Tag was successfully destroyed"
