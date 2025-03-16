@@ -3,7 +3,7 @@ class Admin::AuthorsController < ApplicationController
 
   # GET /admin/authors
   def index
-    @authors = Author.all
+    @authors = Author.all.includes(avatar_attachment: :blob).load
   end
 
   # GET /admin/authors/1
