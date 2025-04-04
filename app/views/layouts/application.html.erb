@@ -18,8 +18,33 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="bg-gray-100 min-h-screen">
+    <header class="bg-white shadow">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <%= link_to root_path do %>
+          <h1 class="text-xl font-bold text-indigo-600">📚 Library</h1>
+        <% end %>
+
+        <% if user_signed_in? %>
+          <div class="flex items-center space-x-4">
+            <span class="text-sm text-gray-600">Hi, <%= current_user.email %></span>
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-sm text-red-600 hover:underline" %>
+          </div>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "text-sm text-indigo-600 hover:underline" %>
+        <% end %>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-6">
+      <% if notice %>
+        <div class="mb-4 p-4 bg-green-100 text-green-700 rounded-md shadow-sm"><%= notice %></div>
+      <% end %>
+
+      <% if alert %>
+        <div class="mb-4 p-4 bg-red-100 text-red-700 rounded-md shadow-sm"><%= alert %></div>
+      <% end %>
+
       <%= yield %>
     </main>
   </body>

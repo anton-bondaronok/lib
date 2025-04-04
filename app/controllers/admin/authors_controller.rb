@@ -1,4 +1,4 @@
-class Admin::AuthorsController < ApplicationController
+class Admin::AuthorsController < AdminController
   before_action :set_author, only: %i[ show edit update destroy ]
 
   # GET /admin/authors

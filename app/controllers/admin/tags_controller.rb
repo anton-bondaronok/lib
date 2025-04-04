@@ -1,4 +1,4 @@
-class Admin::TagsController < ApplicationController
+class Admin::TagsController < AdminController
   before_action :set_tag, only: %i[ show edit update destroy ]
 
   # GET /admin/tags
@@ -24,7 +24,7 @@ class Admin::TagsController < ApplicationController
     @tag = Tag.new(tag_params)
 
     if @tag.save
-      redirect_to [:admin, @tag], notice: "Tag was successfully created."
+      redirect_to [ :admin, @tag ], notice: "Tag was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +33,7 @@ class Admin::TagsController < ApplicationController
   # PATCH/PUT /admin/tags/1
   def update
     if @tag.update(tag_params)
-      redirect_to [:admin, @tag], notice: "Tag was successfully updated.", status: :see_other
+      redirect_to [ :admin, @tag ], notice: "Tag was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end

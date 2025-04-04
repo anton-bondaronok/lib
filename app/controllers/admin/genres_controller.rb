@@ -1,4 +1,4 @@
-class Admin::GenresController < ApplicationController
+class Admin::GenresController < AdminController
   before_action :set_genre, only: %i[ show edit update destroy ]
 
   # GET /admin/genres or /admin/genres.json
