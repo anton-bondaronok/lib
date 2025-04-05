@@ -1,3 +1,5 @@
-<span translate="no" class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm border border-blue-400">
-  <%= tag.name %>
+<span translate="no" class="inline-block bg-indigo-100 text-indigo-800 text-sm px-3 py-1 rounded-full mb-4">
+  <%= link_to books_path(tag_id: tag.id) do %>
+    <%= tag.name %>
+  <% end %>
 </span>

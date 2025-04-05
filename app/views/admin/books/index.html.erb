@@ -6,13 +6,15 @@
     <%= link_to "New book", new_admin_book_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
-  <div id="books" class="min-w-full">
+  <div id="books" class="min-w-full mt-2">
     <% if @books.any? %>
       <% @books.each do |book| %>
-        <%= render book %>
-        <p>
-          <%= link_to "Show this book", [:admin, book], class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-        </p>
+        <div class="bg-white rounded-2xl shadow hover:shadow-lg transition p-4 h-full mb-2">
+          <%= render book %>
+          <p>
+            <%= link_to "Show this book", [:admin, book], class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+          </p>
+        </div>
       <% end %>
     <% else %>
       <p class="text-center my-10">No books found.</p>

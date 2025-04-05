@@ -9,4 +9,12 @@ class Book < ApplicationRecord
   has_one_attached :avatar
 
   validates :name, :description, presence: true
+
+  def available?
+    true
+  end
+
+  def rating
+    4.5
+  end
 end

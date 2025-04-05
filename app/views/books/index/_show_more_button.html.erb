@@ -1,0 +1,6 @@
+<div id="pagination_button" class="mt-6 text-center">
+  <%= link_to "Show More", books_path(search_params.merge(page: @pagy.next)),
+      method: :get,
+      data: {turbo_stream: true},
+      class: "inline-block px-6 py-2 text-sm font-semibold bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition" %>
+</div>

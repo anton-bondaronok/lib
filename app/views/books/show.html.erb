@@ -1,0 +1,66 @@
+<div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+  <div class="bg-white rounded-3xl shadow-md overflow-hidden p-6 sm:p-8">
+    <div class="flex gap-x-4">
+      <% if @book.avatar.attached? %>
+        <div class="shrink-0">
+          <%= picture_tag(
+          url_for(@book.avatar),
+          image: { class: "rounded-lg object-cover w-[200px] h-[280px] shadow-sm" }
+        ) %>
+        </div>
+      <% end %>
+      <div class="">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2"><%= @book.name %></h1>
+        <p class="text-lg text-gray-600 mb-4">by <%= @book.author.full_name %></p>
+
+        <% if @book.genre.present? %>
+          <span class="inline-block bg-indigo-100 text-indigo-800 text-sm px-3 py-1 rounded-full mb-4">
+            <%= @book.genre.name %>
+          </span>
+        <% end %>
+
+        <% @book.tags.each do |tag| %>
+          <%= render "tags/tag", tag: tag %>
+        <% end %>
+
+        <p class="text-gray-700 leading-relaxed mb-6">
+          <%= simple_format(@book.description) %>
+        </p>
+
+        <% if @book.available? %>
+          <span class="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
+            ✅ Available
+          </span>
+        <% else %>
+          <span class="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
+            ❌ Checked Out
+          </span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="bg-gray-50 px-6 py-4 flex justify-between items-center">
+      <%= link_to "← Back to all books", root_path, class: "text-indigo-600 hover:underline font-medium" %>
+
+      <%# Optional: reserve button %>
+      <% if @book.available? %>
+        <%= button_to "Reserve", "#", method: :post,
+              class: "inline-flex items-center bg-indigo-600 text-white px-4 py-2 rounded-xl shadow hover:bg-indigo-700" %>
+      <% end %>
+    </div>
+
+    <% if @related_by_author.any? %>
+      <h2 class="text-xl font-semibold mt-10 mb-3">More by <%= @book.author.full_name %></h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <%= render partial: "books/book_card", collection: @related_by_author, as: :book %>
+      </div>
+    <% end %>
+
+    <% if @related_by_genre.any? %>
+      <h2 class="text-xl font-semibold mt-10 mb-3">More in <%= @book.genre.name %></h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <%= render partial: "books/book_card", collection: @related_by_genre, as: :book %>
+      </div>
+    <% end %>
+  </div>
+</div>
