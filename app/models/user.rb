@@ -9,6 +9,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
 
+  has_many :comments, dependent: :destroy
+
   after_initialize :set_default_role, if: :new_record?
 
   validates :full_name, presence: true

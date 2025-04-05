@@ -1,0 +1,33 @@
+<div class="mt-8">
+  <h2 class="text-2xl font-semibold text-gray-800 mb-4">Comments</h2>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [ @book, Comment.new ], local: true) do |form| %>
+      <div class="mb-4">
+        <%= form.label :content, 'Write a Comment', class: 'block text-gray-800 font-medium' %>
+        <%= form.text_area :content, rows: 3, class: "w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" %>
+      </div>
+
+      <div class="mb-4">
+        <%= form.submit 'Post Comment', class: 'bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700' %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="mb-2 p-2">
+      <%= link_to "Login", new_user_session_path, class: "text-sm text-indigo-600 hover:underline" %> to write a comment.
+    </p>
+  <% end %>
+
+  <% @book.comments.each do |comment| %>
+    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+      <p><strong><%= comment.user.full_name %>:</strong> <%= comment.content %></p>
+      <div class="flex justify-between">
+        <p class="text-sm text-gray-500">Posted on <%= comment.created_at.strftime("%b %d, %Y") %></p>
+
+        <% if current_user == comment.user %>
+          <%= button_to "Delete comment", book_comment_path(@book, comment), method: :delete, class: "text-sm text-red-600 hover:underline" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

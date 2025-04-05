@@ -26,23 +26,12 @@
         <p class="text-gray-700 leading-relaxed mb-6">
           <%= simple_format(@book.description) %>
         </p>
-
-        <% if @book.available? %>
-          <span class="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
-            ✅ Available
-          </span>
-        <% else %>
-          <span class="inline-flex items-center px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
-            ❌ Checked Out
-          </span>
-        <% end %>
       </div>
     </div>
 
     <div class="bg-gray-50 px-6 py-4 flex justify-between items-center">
       <%= link_to "← Back to all books", root_path, class: "text-indigo-600 hover:underline font-medium" %>
 
-      <%# Optional: reserve button %>
       <% if @book.available? %>
         <%= button_to "Reserve", "#", method: :post,
               class: "inline-flex items-center bg-indigo-600 text-white px-4 py-2 rounded-xl shadow hover:bg-indigo-700" %>
@@ -62,5 +51,7 @@
         <%= render partial: "books/book_card", collection: @related_by_genre, as: :book %>
       </div>
     <% end %>
+
+    <%= render "books/show/comments" %>
   </div>
 </div>

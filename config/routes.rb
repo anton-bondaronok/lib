@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
 
-  resources :books, only: %i[show index]
+  resources :books, only: %i[show index] do
+    resources :comments, only: %i[create destroy]
+  end
+
   resource :profile, only: %i[show edit update destroy], controller: "profiles" do
     member do
       get :delete
