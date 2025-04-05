@@ -1,14 +1,18 @@
-<div class="flex space-x-6 max-w-3xl mx-auto bg-white p-6 rounded-xl shadow mt-8">
-  <!-- Sidebar -->
-  <%= render 'profiles/sidebar' %>
+<div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+  <div class="bg-white rounded-3xl shadow-md overflow-hidden p-6 sm:p-8">
+    <div class="flex space-x-6">
+      <!-- Sidebar -->
+      <%= render 'profiles/sidebar' %>
 
-  <!-- Main Profile Content -->
-  <div class="flex-1">
-    <div class="max-w-xl mx-auto bg-white ">
-      <h3 class="text-xl font-semibold text-gray-800 mb-4">Delete my account</h3>
+      <!-- Main Profile Content -->
+      <div class="flex-1">
+        <div class="max-w-xl mx-auto bg-white ">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Delete my account</h3>
 
-      <div class=" text-gray-600">
-        Unhappy? <%= button_to "Delete my account", profile_path, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "text-red-600 hover:underline" %>
+          <div class=" text-gray-600">
+            Unhappy? <%= button_to "Delete my account", profile_path, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "text-red-600 hover:underline" %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "authors/show"
   root to: "books#index"
 
   devise_for :users, controllers: {
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
   resources :books, only: %i[show index] do
     resources :comments, only: %i[create destroy]
   end
+  resources :authors, only: %i[show]
 
   resource :profile, only: %i[show edit update destroy], controller: "profiles" do
     member do
