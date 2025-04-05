@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :books, only: %i[show index] do
     resources :comments, only: %i[create destroy]
+    resources :ratings, only: %i[create update]
   end
   resources :authors, only: %i[show]
 

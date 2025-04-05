@@ -10,6 +10,7 @@ class User < ApplicationRecord
          :rememberable, :validatable
 
   has_many :comments, dependent: :destroy
+  has_many :ratings, dependent: :destroy
 
   after_initialize :set_default_role, if: :new_record?
 

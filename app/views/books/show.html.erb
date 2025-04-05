@@ -27,6 +27,8 @@
           <%= render "tags/tag", tag: tag %>
         <% end %>
 
+        <%= render "books/show/rating" %>
+
         <p class="text-gray-700 leading-relaxed mb-6">
           <%= simple_format(@book.description) %>
         </p>

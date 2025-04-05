@@ -1,11 +1,20 @@
-<% rounded_rating = @book.rating.to_f.round %>
-<div class="flex items-center mb-4">
-  <% 5.times do |i| %>
-    <% if i < rounded_rating %>
-      <span class="text-yellow-400 text-xl">★</span>
-    <% else %>
-      <span class="text-gray-300 text-xl">★</span>
+<%= form_with model: [@book, Rating.find_or_initialize_by(user: current_user, book: @book)], local: true, data: { controller: "rating" } do |f| %>
+  <div class="flex items-center space-x-1" data-rating-target="stars">
+    <% 1.upto(5) do |star| %>
+      <%= f.radio_button :value, star, id: "star-#{star}", class: "hidden", data: { action: "change->rating#submit" } %>
+
+      <label for="star-#{star}" 
+        class="cursor-pointer text-2xl transition-colors duration-200"
+        data-action="mouseenter->rating#highlight mouseleave->rating#reset click->rating#select"
+        data-rating-target="star"
+        data-value="<%= star %>">
+        <span class="<%= 'text-yellow-400' if f.object.value.to_i >= star %>">★</span>
+      </label>
     <% end %>
-  <% end %>
-  <span class="ml-2 text-sm text-gray-600"><%= number_with_precision(@book.rating, precision: 1) %>/5</span>
+  </div>
+<% end %>
+
+<!-- Show current average -->
+<div class="mt-2 text-sm text-gray-600">
+  Average rating: <strong><%= @book.avg_rating %> / 5</strong>
 </div>
