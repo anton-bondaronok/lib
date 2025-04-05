@@ -13,7 +13,8 @@
 
   <div class="my-5">
     <%= form.label :name %>
-    <%= form.text_field :name, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": book.errors[:name].none?, "border-red-400 focus:outline-red-600": book.errors[:name].any?}] %>
+    <%= form.text_field :name,
+        class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": book.errors[:name].none?, "border-red-400 focus:outline-red-600": book.errors[:name].any?}] %>
   </div>
 
   <div class="my-5">
@@ -28,12 +29,14 @@
 
   <div class="my-5">
     <%= form.label :genre_id %>
-    <%= form.select :genre_id, Genre.all.map { |g| [g.name, g.id] }, { include_blank: true }, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": book.errors[:genre_id].none?, "border-red-400 focus:outline-red-600": book.errors[:genre_id].any?}] %>
+    <%= form.select :genre_id, Genre.all.map { |g| [g.name, g.id] },
+        { include_blank: true }, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": book.errors[:genre_id].none?, "border-red-400 focus:outline-red-600": book.errors[:genre_id].any?}] %>
   </div>
 
   <div class="my-5">
     <%= form.label :author_id %>
-    <%= form.select :author_id, Author.all.map { |g| [g.full_name, g.id] }, { include_blank: true }, class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": book.errors[:author_id].none?, "border-red-400 focus:outline-red-600": book.errors[:author_id].any?}] %>
+    <%= form.select :author_id, Author.all.map { |g| [g.full_name, g.id] }, { include_blank: true },
+        class: ["block shadow rounded-md border outline-none px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": book.errors[:author_id].none?, "border-red-400 focus:outline-red-600": book.errors[:author_id].any?}] %>
   </div>
 
   <template data-nested-form-target="template">

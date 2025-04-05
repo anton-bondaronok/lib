@@ -8,7 +8,12 @@ if ENV["CLEAR"] == "1"
   Author.destroy_all
   Tag.destroy_all
   Genre.destroy_all
+  User.destroy_all
 end
+
+User.create!(email: 'admin@example.com', full_name: "Admin", password: '1234QWER', role: 'super_admin')
+User.create!(email: 'librarian@example.com', full_name: "Librarian", password: '1234QWER', role: 'librarian')
+User.create!(email: 'abondaronok@gmail.com', full_name: "Anton", password: '1234QWER', role: 'user')
 
 [
   "Fiction", "Non-Fiction", "Mystery", "Thriller", "Science Fiction", "Fantasy",

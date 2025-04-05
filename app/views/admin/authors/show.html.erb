@@ -1,13 +1,36 @@
-<% content_for :title, "Showing author" %>
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow">
+  <h1 class="text-2xl font-semibold text-gray-800 mb-6">Author Details</h1>
 
-<div class="md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Showing author</h1>
+  <div class="pb-4">
+    <% if @author.avatar.attached? %>
+      <%= picture_tag(
+        url_for(@author.avatar),
+        image: { class: "rounded-md object-cover h-[320px] w-[200px]" }
+      )%>
+    <% end %>
+  </div>
 
-  <%= render @author %>
+  <div class="space-y-4 text-gray-700">
+    <div class="font-medium block mb-1">
+      <span class="font-medium block mb-1">Full Name:</span>
+      <p class="text-lg text-gray-600"><%= simple_format(@author.full_name) %></p>
+    </div>
 
-  <%= link_to "Edit this author", edit_admin_author_path(@author), class: "mt-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to authors", admin_authors_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <div class="inline-block ml-2">
-    <%= button_to "Destroy this author", [:admin, @author], method: :delete, class: "mt-2 rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium" %>
+    <% if @author.short_bio.present? %>
+      <div>
+        <span class="font-medium block mb-1">Biography:</span>
+        <p class="text-gray-600"><%= simple_format(@author.short_bio) %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-6 flex justify-between">
+    <div class="inline-block">
+      <%= link_to "Edit this author", edit_admin_author_path(@author), class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+      <%= link_to "Back to authors", admin_authors_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+    </div>
+    <div class="inline-block ml-2">
+      <%= button_to "Delete this author", [:admin, @author], method: :delete, class: "mt-2 rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium" %>
+    </div>
   </div>
 </div>

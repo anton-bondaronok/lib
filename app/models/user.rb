@@ -14,6 +14,14 @@ class User < ApplicationRecord
   validates :full_name, presence: true
   validates :full_name, length: { minimum: 5, maximum: 30 }
 
+  def confirmed?
+    super_admin? || librarian? || confirmed_at.present?
+  end
+
+  def locked?
+    locked_at.present?
+  end
+
   private
 
   def set_default_role

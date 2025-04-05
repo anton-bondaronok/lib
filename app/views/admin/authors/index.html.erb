@@ -1,21 +1,48 @@
-<% content_for :title, "Authors" %>
-
-<div class="w-full">
-  <div class="flex justify-between items-center">
+<div class="bg-white p-6 rounded-xl shadow">
+  <div class="flex gap-x-6 items-center mb-6">
     <h1 class="font-bold text-4xl">Authors</h1>
     <%= link_to "New author", new_admin_author_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
-  <div id="authors" class="min-w-full">
-    <% if @authors.any? %>
+  <%= form_with url: admin_authors_path, method: :get, local: true, class: "mb-4" do |f| %>
+    <div class="flex gap-2">
+      <%= f.text_field :query, value: params[:query], placeholder: "Search authors...", class: "w-full px-3 py-2 border rounded-md shadow-sm focus:ring focus:border-indigo-300" %>
+      <%= f.submit "Search", class: "px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700" %>
+    </div>
+  <% end %>
+
+  <table class="min-w-full table-auto border-gray-200 rounded-lg overflow-hidden shadow-sm">
+    <thead class="bg-gray-100 font-semibold text-gray-700">
+      <tr>
+        <th class="px-4 py-2 text-left">Avatar</th>
+        <th class="px-4 py-2 text-left">Full name</th>
+        <th class="px-4 py-2 text-left">Created</th>
+        <th class="px-4 py-2 text-left"></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
       <% @authors.each do |author| %>
-        <%= render author %>
-        <p>
-          <%= link_to "Show this author", [:admin, author], class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-        </p>
-      <% end %>
-    <% else %>
-      <p class="text-center my-10">No authors found.</p>
+        <tr>
+          <td class="px-6 py-4">
+            <% if author.avatar.attached? %>
+              <%= picture_tag(
+                  url_for(author.avatar),
+                  image: { class: "rounded shadow-md object-cover h-[80px] w-[50px]" }
+                )%>
+            <% else %>
+              <span class="text-sm text-gray-400 italic">No image</span>
+            <% end %>
+          </td>
+
+          <td class="px-6 py-4 font-medium text-gray-800"><%= author.full_name %></td>
+          <td class="px-4 py-4 font-medium text-gray-800"><%= l(author.created_at, format: :long) %></td>
+          <td class="px-4 py-4 text-right">
+            <%= link_to "Show", admin_author_path(author), class: "text-indigo-600 hover:underline mr-2" %>
+            <%= link_to "Edit", edit_admin_author_path(author), class: "text-indigo-600 hover:underline" %>
+          </td>
+        </tr>
+      </tr>
     <% end %>
-  </div>
+  </tbody>
+</table>
 </div>

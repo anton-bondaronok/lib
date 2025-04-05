@@ -3,7 +3,11 @@ class Admin::TagsController < AdminController
 
   # GET /admin/tags
   def index
-    @tags = Tag.all
+    @tags = if params[:query].present?
+      Tag.where("name ILIKE :q", q: "%#{params[:query]}%")
+    else
+      Tag.all
+    end.order(created_at: :desc)
   end
 
   # GET /admin/tags/1

@@ -1,13 +1,29 @@
-<% content_for :title, "Showing tag" %>
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-xl shadow">
+  <div class="flex justify-between">
+    <h1 class="text-2xl font-semibold text-gray-800 mb-4">Tag</h1>
+  </div>
 
-<div class="md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Showing tag</h1>
+  <div class="space-y-4">
+    <div class="flex justify-between">
+      <span class="text-md text-gray-500 py-1">Tag Name:</span>
+      <span class="text-base text-gray-800 font-medium"><%= @tag.name %></span>
+    </div>
 
-  <%= render @tag %>
+    <div class="flex justify-between">
+      <span class="text-md text-gray-500">Created At:</span>
+      <span class="text-base text-gray-800 font-medium py-1">
+        <%= @tag.created_at ? l(@tag.created_at, format: :long) : "Not created" %>
+      </span>
+    </div>
+  </div>
 
-  <%= link_to "Edit this tag", edit_admin_tag_path(@tag), class: "mt-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to tags", admin_tags_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <div class="inline-block ml-2">
-    <%= button_to "Destroy this tag", [:admin, @tag], method: :delete, class: "mt-2 rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium" %>
+  <div class="mt-6 flex justify-between">
+    <div class="inline-block">
+      <%= link_to "Edit this tag", edit_admin_tag_path(@tag), class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+      <%= link_to "Back to tags", admin_tags_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+    </div>
+    <div class="inline-block ml-2">
+      <%= button_to "Delete this tag", [:admin, @tag], method: :delete, class: "mt-2 rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium" %>
+    </div>
   </div>
 </div>

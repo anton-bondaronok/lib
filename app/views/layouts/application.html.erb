@@ -27,8 +27,16 @@
 
         <% if user_signed_in? %>
           <div class="flex items-center space-x-4">
-            <span class="text-sm text-gray-600">Hi, <%= current_user.email %></span>
-            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-sm text-red-600 hover:underline" %>
+
+            <% if current_user.super_admin? %>
+              <%= link_to "Users", admin_users_path, class: "text-sm text-indigo-600 hover:underline" %>
+              <%= link_to "Books", admin_books_path, class: "text-sm text-indigo-600 hover:underline" %>
+              <%= link_to "Authors", admin_authors_path, class: "text-sm text-indigo-600 hover:underline" %>
+              <%= link_to "Genres", admin_genres_path, class: "text-sm text-indigo-600 hover:underline" %>
+              <%= link_to "Tags", admin_tags_path, class: "text-sm text-indigo-600 hover:underline" %>
+            <% end %>
+
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, data: { turbo: false }, class: "text-sm text-red-600 hover:underline" %>
           </div>
         <% else %>
           <%= link_to "Login", new_user_session_path, class: "text-sm text-indigo-600 hover:underline" %>

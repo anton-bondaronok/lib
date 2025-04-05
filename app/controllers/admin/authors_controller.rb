@@ -3,7 +3,11 @@ class Admin::AuthorsController < AdminController
 
   # GET /admin/authors
   def index
-    @authors = Author.all.includes(avatar_attachment: :blob).load
+    @authors = if params[:query].present?
+      Author.where("full_name ILIKE :q OR short_bio ILIKE :q", q: "%#{params[:query]}%")
+    else
+      Author.all
+    end.order(created_at: :desc).includes(avatar_attachment: :blob)
   end
 
   # GET /admin/authors/1

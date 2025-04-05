@@ -3,7 +3,11 @@ class Admin::GenresController < AdminController
 
   # GET /admin/genres or /admin/genres.json
   def index
-    @genres = Genre.all
+    @genres = if params[:query].present?
+      Genre.where("name ILIKE :q", q: "%#{params[:query]}%")
+    else
+      Genre.all
+    end.order(created_at: :desc)
   end
 
   # GET /admin/genres/1 or /admin/genres/1.json

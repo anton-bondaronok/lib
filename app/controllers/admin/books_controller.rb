@@ -3,7 +3,11 @@ class Admin::BooksController < AdminController
 
   # GET /admin/books
   def index
-    @books = Book.all.includes(:genre, :author, avatar_attachment: :blob).load
+    @books = if params[:query].present?
+      Book.where("name ILIKE :q OR description ILIKE :q", q: "%#{params[:query]}%")
+    else
+      Book.all
+    end.includes(:author, :genre, avatar_attachment: :blob).order(created_at: :desc).load
   end
 
   # GET /admin/books/1

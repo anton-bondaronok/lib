@@ -1,21 +1,35 @@
-<% content_for :title, "Tags" %>
-
-<div class="w-full">
-  <div class="flex justify-between items-center">
+<div class="bg-white p-6 rounded-xl shadow">
+  <div class="flex gap-x-6 items-center mb-6">
     <h1 class="font-bold text-4xl">Tags</h1>
     <%= link_to "New tag", new_admin_tag_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
-  <div id="tags" class="min-w-full">
-    <% if @tags.any? %>
+  <%= form_with url: admin_tags_path, method: :get, local: true, class: "mb-4" do |f| %>
+    <div class="flex gap-2">
+      <%= f.text_field :query, value: params[:query], placeholder: "Search tags...", class: "w-full px-3 py-2 border rounded-md shadow-sm focus:ring focus:border-indigo-300" %>
+      <%= f.submit "Search", class: "px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700" %>
+    </div>
+  <% end %>
+
+  <table class="min-w-full table-auto border-gray-200 rounded-lg overflow-hidden shadow-sm">
+    <thead class="bg-gray-100 font-semibold text-gray-700">
+      <tr>
+        <th class="px-4 py-2 text-left">Name</th>
+        <th class="px-4 py-2 text-left">Created</th>
+        <th class="px-4 py-2"></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100 text-gray-800">
       <% @tags.each do |tag| %>
-        <%= render tag %>
-        <p>
-          <%= link_to "Show this tag", [:admin, tag], class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-        </p>
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-4"><%= tag.name %></td>
+          <td class="px-4 py-4"><%= l(tag.created_at, format: :long) %></td>
+          <td class="px-4 py-4 text-right">
+            <%= link_to "Show", admin_tag_path(tag), class: "text-indigo-600 hover:underline mr-2" %>
+            <%= link_to "Edit", edit_admin_tag_path(tag), class: "text-indigo-600 hover:underline" %>
+          </td>
+        </tr>
       <% end %>
-    <% else %>
-      <p class="text-center my-10">No tags found.</p>
-    <% end %>
-  </div>
+    </tbody>
+  </table>
 </div>

@@ -13,6 +13,14 @@ Rails.application.routes.draw do
     resources :tags
     resources :authors
     resources :genres
+
+    resources :users do
+      member do
+        patch :confirm
+        patch :lock
+        patch :unlock
+      end
+    end
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
