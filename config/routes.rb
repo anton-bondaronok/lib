@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   }
 
   resources :books, only: %i[show index]
+  resource :profile, only: %i[show edit update destroy], controller: "profiles" do
+    member do
+      get :delete
+    end
+  end
 
   namespace :admin do
     resources :books

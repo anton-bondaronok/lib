@@ -1,0 +1,47 @@
+<div class="flex space-x-6 max-w-3xl mx-auto bg-white p-6 rounded-xl shadow mt-8">
+  <!-- Sidebar -->
+  <%= render 'profiles/sidebar' %>
+
+  <div class="flex-1">
+    <div class="max-w-xl mx-auto bg-white">
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">Edit profile</h3>
+
+      <%= form_for(@user, url: profile_path, data: { turbo: false }, html: { method: :put }) do |f| %>
+        <% if @user.errors.any? %>
+          <div class="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-3">
+            <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="mb-4">
+          <%= f.label :full_name, class: "block text-sm font-medium text-gray-700" %>
+          <%= f.text_field :full_name, class: "mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+          <%= f.text_field :email, class: "mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
+          <p class="text-sm text-gray-500"><i>(leave blank if you don't want to change it)</i></p>
+          <%= f.password_field :password, autocomplete: "new-password", class: "mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :password_confirmation, class: "block text-sm font-medium text-gray-700" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" %>
+        </div>
+
+        <div class="mt-6 flex justify-end items-center">
+          <%= f.submit "Update", class: "px-6 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

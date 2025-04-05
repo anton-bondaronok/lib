@@ -27,14 +27,7 @@ class Admin::UsersController < AdminController
   end
 
   def update
-    update_params = user_params.tap do |p|
-      next if p[:password].present?
-
-      p.delete("password")
-      p.delete("password_confirmation")
-    end
-
-    if @user.update(update_params)
+    if @user.update(user_params)
       redirect_to admin_user_path(@user), notice: "User updated"
     else
       render :edit
@@ -64,7 +57,12 @@ class Admin::UsersController < AdminController
   private
 
   def user_params
-    params.require(:user).permit(:full_name, :email, :role, :password, :password_confirmation)
+    params.require(:user).permit(:full_name, :email, :role, :password, :password_confirmation).tap do |user_params|
+      next if user_params[:password].present?
+
+      user_params.delete("password")
+      user_params.delete("password_confirmation")
+    end
   end
 
   def set_user
