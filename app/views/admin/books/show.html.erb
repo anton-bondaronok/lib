@@ -1,47 +1,53 @@
 <% content_for :title, "Showing book" %>
 
 <div class="md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Showing book</h1>
+  <h1 class="text-2xl font-semibold text-gray-800 mb-6">Book Details</h1>
 
-  <div class="p-4">
+  <div class="pb-4">
     <% if @book.avatar.attached? %>
       <%= picture_tag(
         url_for(@book.avatar),
-        image: { class: "rounded-md object-cover h-[160px] w-[100px]" }
+        image: { class: "rounded-md object-cover h-[320px] w-[200px]" }
       )%>
     <% end %>
   </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= @book.name %>
-  </p>
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= @book.description %>
-  </p>
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Avatar:</strong>
-    <%= link_to @book.avatar.filename, @book.avatar if @book.avatar.attached? %>
-  </p>
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Genre:</strong>
-    <%= link_to @book.genre.name, admin_genre_path(@book.genre) %>
-  </p>
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Tags:</strong>
-    <% @book.tags.each do |tag| %>
-      <%= render "tags/tag", tag: tag %>
-    <% end %>
-  </p>
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Author:</strong>
-    <%= link_to @book.author.full_name, admin_author_path(@book.author) %>
-  </p>
+  <div class="space-y-4 text-gray-700">
+    <div class="font-bold text-xl block mb-1">
+      <p class="text-lg text-gray-600"><%= simple_format(@book.name) %></p>
+    </div>
+
+    <%= render "books/show/rating" %>
+
+    <div>
+      <span class="font-medium block mb-1">Description:</span>
+      <p class="text-gray-600"><%= simple_format(@book.description) %></p>
+    </div>
+
+    <div>
+      <span class="font-medium block mb-1">Author:</span>
+      <%= link_to @book.author.full_name, admin_author_path(@book.author), class: "text-indigo-600 hover:underline" %>
+    </div>
+
+    <div>
+      <span class="font-medium block mb-1">Genre:</span>
+      <%= link_to @book.genre.name, admin_genre_path(@book.genre), class: "text-indigo-600 hover:underline" %>
+    </div>
+
+    <div>
+      <span class="font-medium block mb-1">Tags:</span>
+      <% @book.tags.each do |tag| %>
+        <%= render "tags/tag", tag: tag %>
+      <% end %>
+    </div>
+
+  </div>
 
   <%= link_to "Edit this book", edit_admin_book_path(@book), class: "mt-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
   <%= link_to "Back to books", admin_books_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
   <div class="inline-block ml-2">
     <%= button_to "Destroy this book", [:admin, @book], method: :delete, class: "mt-2 rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium" %>
   </div>
+
+  <%= render "books/show/comments" %>
 </div>
