@@ -1,12 +1,12 @@
 class Admin::UsersController < AdminController
   before_action :set_user, except: %i[index new create]
+  before_action :authenticate_super_admin!, except: %i[index]
 
   def index
-    @users = if params[:query].present?
-      User.where("full_name ILIKE :q OR email ILIKE :q", q: "%#{params[:query]}%")
-    else
-      User.all
-    end.order(created_at: :desc)
+    @users = User.all
+    @users = @users.where(role: "user") if current_user.librarian?
+    @users = @users.where("full_name ILIKE :q OR email ILIKE :q", q: "%#{params[:query]}%")  if params[:query].present?
+    @users = @users.order(created_at: :desc)
   end
 
   def new
@@ -67,5 +67,11 @@ class Admin::UsersController < AdminController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def authenticate_super_admin!
+    return if @user&.user?
+
+    redirect_to admin_users_path, alert: "Not authorized" unless current_user.super_admin?
   end
 end
