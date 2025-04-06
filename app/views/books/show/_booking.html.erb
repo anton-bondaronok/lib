@@ -1,4 +1,4 @@
-<% if booking = current_user.bookings.find_by(book: @book) %>
+<% if booking = current_user&.bookings&.find_by(book: @book) %>
   <div class="mt-2 px-2 py-1 text-xs rounded-full font-semibold max-w-fit <%= booking_badge_color(booking.status) %>">
     <%= booking.status.titleize %>
   </div>

@@ -27,6 +27,14 @@ class User < ApplicationRecord
     locked_at.present?
   end
 
+  def active_for_authentication?
+    super && !locked?
+  end
+
+  def inactive_message
+    locked? ? :locked : super
+  end
+
   private
 
   def set_default_role
