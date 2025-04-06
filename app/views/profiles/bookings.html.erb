@@ -1,0 +1,66 @@
+<h1 class="text-2xl font-bold mb-6">My Bookings</h1>
+
+<% grouped_bookings = current_user.bookings.includes(:book).group_by(&:status) %>
+
+<div class="space-y-10">
+  <% Booking.statuses.keys.each do |status| %>
+    <% bookings = grouped_bookings[status] || [] %>
+    <% next if bookings.empty? %>
+
+    <div>
+      <h2 class="text-xl font-semibold mb-3 flex items-center gap-2">
+        <%= booking_status_icon(status) %>
+        <%= status.titleize %>
+        <span class="ml-2 text-sm text-gray-500 italic"><%= booking_status_hint(status) %></span>
+      </h2>
+
+      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <% bookings.each do |booking| %>
+          <div class="bg-white shadow rounded-xl p-4 border-l-4 <%= booking_border_color(status) %>">
+            <div class="flex gap-4">
+              <% if booking.book.avatar.attached? %>
+                <div class="shrink-0">
+                  <%= picture_tag(
+                    url_for(booking.book.avatar),
+                    image: { class: "rounded-lg object-cover w-[120px] h-[168px] shadow-sm" }
+                  ) %>
+                </div>
+              <% end %>
+
+              <div class="flex-1">
+                <h3 class="text-lg font-bold text-gray-800 mb-1">
+                  <%= link_to booking.book.name, book_path(booking.book), class: "hover:underline" %>
+                </h3>
+                <p class="text-sm text-gray-600 mb-2">By <%= booking.book.author.full_name %></p>
+
+                <div class="text-xs text-gray-500 space-y-1 bg-gray-50 py-2 rounded">
+                  <%# Requested date %>
+                  <% if booking.taken_at.blank? %>
+                    <p><strong>Requested:</strong> <%= l booking.created_at.to_date %></p>
+                  <% end %>
+
+                  <% if booking.taken_at.present? && booking.returned_at.blank? %>
+                    <p><strong>Taken at:</strong> <%= l booking.taken_at.to_date %></p>
+                    <p><strong>Return by:</strong> <%= l (booking.taken_at + 14.days).to_date %></p>
+                  <% end %>
+
+                  <% if booking.returned_at.present? %>
+                    <p><strong>Returned at:</strong> <%= l booking.returned_at.to_date %></p>
+                  <% end %>
+                </div>
+
+                <% if booking.overdue? %>
+                  <span class="inline-block mt-2 px-2 py-1 text-xs bg-red-100 text-red-800 rounded-full font-semibold">Overdue!</span>
+                <% end %>
+
+                <span class="inline-block mt-2 px-2 py-1 text-xs rounded-full font-semibold <%= booking_badge_color(status) %>">
+                  <%= status.titleize %>
+                </span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

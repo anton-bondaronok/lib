@@ -1,0 +1,101 @@
+<div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow">
+  <div class="flex justify-between">
+    <h1 class="text-2xl font-semibold text-gray-800 mb-4">Booking</h1>
+  </div>
+
+  <div class="space-y-4">
+    <div class="flex justify-between">
+      <span class="text-md text-gray-500 py-1">Book Name:</span>
+      <span class="text-base text-gray-800 font-medium">
+        <%= link_to @booking.book.name, admin_book_path(@booking.book), class: "text-indigo-600 hover:underline mr-2" %>
+      </span>
+    </div>
+
+    <div class="flex justify-between">
+      <span class="text-md text-gray-500 py-1">User Name:</span>
+      <span class="text-base text-gray-800 font-medium">
+        <%= link_to @booking.user.full_name, admin_user_path(@booking.user), class: "text-indigo-600 hover:underline mr-2" %>
+      </span>
+    </div>
+
+    <div class="flex justify-between">
+      <span class="text-md text-gray-500 py-1">User email:</span>
+      <span class="text-base text-gray-800 font-medium">
+        <%= link_to @booking.user.email, admin_user_path(@booking.user), class: "text-indigo-600 hover:underline mr-2" %>
+      </span>
+    </div>
+
+    <div class="flex justify-between">
+      <span class="text-md text-gray-500">Created At:</span>
+      <span class="text-base text-gray-800 font-medium py-1">
+        <%= @booking.created_at ? l(@booking.created_at, format: :long) : "Not created" %>
+      </span>
+    </div>
+
+    <% if @booking.taken? %>
+      <div class="flex justify-between">
+        <span class="text-md text-gray-500">Taken At:</span>
+        <span class="text-base text-gray-800 font-medium py-1">
+          <%= @booking.taken_at ? l(@booking.taken_at, format: :long) : "Not taken" %>
+        </span>
+      </div>
+
+      <% unless @booking.returned? %>
+        <div class="flex justify-between">
+          <span class="text-md text-gray-500">Return up to:</span>
+          <span class="text-base <%= @booking.overdue? ? "text-red-800" : "text-gray-800" %> font-medium py-1">
+            <%= @booking.deadline ? l(@booking.deadline, format: :long) : "Not created" %>
+          </span>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if @booking.returned? %>
+      <div class="flex justify-between">
+        <span class="text-md text-gray-500">Returned At:</span>
+        <span class="text-base text-gray-800 font-medium py-1">
+          <%= @booking.returned_at ? l(@booking.returned_at, format: :long) : "Not returned" %>
+        </span>
+      </div>
+    <% end %>
+
+    <div class="flex justify-between">
+      <span class="text-md text-gray-500">Status:</span>
+      <span class="text-base text-gray-800 font-medium py-1">
+        <div class="mt-2 px-2 py-1 text-xs rounded-full font-semibold max-w-fit <%= booking_badge_color(@booking.status) %>">
+          <%= @booking.status.titleize %>
+        </div>
+      </span>
+    </div>
+  </div>
+
+  <div class="mt-6 flex justify-between">
+    <div class="inline-block">
+      <%= link_to "Back to bookings", admin_bookings_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+    </div>
+    <div class="inline-block ml-2">
+      <div class="inline-block mt-2">
+        <% if @booking.pending? %>
+          <%= link_to "Approve", approve_admin_booking_path(@booking),
+                      data: { turbo_method: :patch },
+                      class: "px-3.5 py-2.5 bg-green-600 text-white rounded-md font-medium hover:bg-green-700" %>
+          <%= link_to "Reject", reject_admin_booking_path(@booking),
+                      data: { turbo_method: :patch },
+                      class: "px-3.5 py-2.5 bg-red-600 text-white rounded-md font-medium hover:bg-red-700" %>
+        <% end %>
+
+        <% if @booking.approved? %>
+          <%= link_to "Mark as taken", take_admin_booking_path(@booking),
+                      data: { turbo_method: :patch },
+                      class: "px-3.5 py-2.5 bg-green-600 text-white rounded-md font-medium hover:bg-green-700" %>
+        <% end %>
+
+        <% if @booking.taken? %>
+          <%= link_to "Mark as returned", return_admin_booking_path(@booking),
+                      data: { turbo_method: :patch },
+                      class: "px-3.5 py-2.5 bg-green-600 text-white rounded-md font-medium hover:bg-green-700" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

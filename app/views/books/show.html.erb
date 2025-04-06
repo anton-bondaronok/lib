@@ -38,10 +38,7 @@
     <div class="bg-gray-50 px-6 py-4 flex justify-between items-center">
       <%= link_to "← Back to all books", root_path, class: "text-indigo-600 hover:underline font-medium" %>
 
-      <% if @book.available? %>
-        <%= button_to "Reserve", "#", method: :post,
-              class: "inline-flex items-center bg-indigo-600 text-white px-4 py-2 rounded-xl shadow hover:bg-indigo-700" %>
-      <% end %>
+      <%= render "books/show/booking" %>
     </div>
 
     <% if @related_by_author.any? %>

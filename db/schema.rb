@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_05_151211) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_06_101755) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -56,6 +56,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_05_151211) do
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_book_tags_on_book_id"
     t.index ["tag_id"], name: "index_book_tags_on_tag_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.string "status"
+    t.date "taken_at"
+    t.date "returned_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_bookings_on_book_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -118,6 +130,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_05_151211) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "book_tags", "books"
   add_foreign_key "book_tags", "tags"
+  add_foreign_key "bookings", "books"
+  add_foreign_key "bookings", "users"
   add_foreign_key "books", "authors"
   add_foreign_key "books", "genres"
   add_foreign_key "comments", "books"

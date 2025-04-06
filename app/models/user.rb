@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :ratings, dependent: :destroy
+  has_many :bookings
+  has_many :booked_books, through: :bookings, source: :book
 
   after_initialize :set_default_role, if: :new_record?
 

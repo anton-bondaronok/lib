@@ -1,4 +1,7 @@
 class ProfilesController < ApplicationController
+  def bookings
+  end
+
   def show
   end
 

@@ -29,12 +29,14 @@
           <div class="flex items-center space-x-4">
 
             <% if current_user.super_admin? || current_user.librarian? %>
+              <%= link_to "Bookigs", admin_bookings_path, class: "text-sm text-indigo-600 hover:underline" %>
               <%= link_to "Users", admin_users_path, class: "text-sm text-indigo-600 hover:underline" %>
               <%= link_to "Books", admin_books_path, class: "text-sm text-indigo-600 hover:underline" %>
               <%= link_to "Authors", admin_authors_path, class: "text-sm text-indigo-600 hover:underline" %>
               <%= link_to "Genres", admin_genres_path, class: "text-sm text-indigo-600 hover:underline" %>
               <%= link_to "Tags", admin_tags_path, class: "text-sm text-indigo-600 hover:underline" %>
             <% else %>
+              <%= link_to "My books", bookings_profile_path, class: "text-sm text-indigo-600 hover:underline" %>
               <%= link_to "Profile", profile_path, class: "text-sm text-indigo-600 hover:underline" %>
             <% end %>
 

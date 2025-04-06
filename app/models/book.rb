@@ -6,6 +6,8 @@ class Book < ApplicationRecord
   has_many :ratings, dependent: :destroy
   has_many :book_tags, dependent: :destroy
   has_many :tags, through: :book_tags
+  has_many :bookings
+  has_many :booked_by_users, through: :bookings, source: :user
 
   accepts_nested_attributes_for :book_tags, reject_if: :all_blank, allow_destroy: true
 

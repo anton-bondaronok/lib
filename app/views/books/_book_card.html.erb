@@ -1,4 +1,6 @@
-<div class="bg-gray-50 rounded-2xl shadow-md hover:shadow-xl transition-all duration-200 overflow-hidden h-full flex flex-col items-center">
+<% booking = local_assigns[:booking] || current_user&.bookings&.find_by(book: book) %>
+<div class="bg-gray-50 rounded-2xl shadow-md hover:shadow-xl transition-all duration-200 overflow-hidden h-full flex flex-col items-center
+            <%= "border-l-4 " + booking_border_color(booking.status) if booking.present? %>">
   <div class="flex gap-4 p-3">
     <% if book.avatar.attached? %>
       <div class="shrink-0">
@@ -22,9 +24,15 @@
           <p class="text-sm text-gray-500 line-clamp-3 leading-relaxed">
             <%= truncate(book.description, length: 130) %>
           </p>
+
+          <% if booking.present? %>
+            <div class="mt-2 px-2 py-1 text-xs rounded-full font-semibold max-w-fit <%= booking_badge_color(booking.status) %>">
+              <%= booking.status.titleize %>
+            </div>
+          <% end %>
         </div>
 
-        <div class="pb-4">
+        <div class="">
           <%= link_to "View Details", book_path(book), data: { turbo_frame: "_top" },
               class: "inline-block text-sm font-semibold text-indigo-600 hover:text-indigo-800 hover:underline" %>
         </div>

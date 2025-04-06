@@ -10,12 +10,16 @@ Rails.application.routes.draw do
   resources :books, only: %i[show index] do
     resources :comments, only: %i[create destroy]
     resources :ratings, only: %i[create update]
+
+    resources :bookings, only: %i[create update destroy]
   end
+
   resources :authors, only: %i[show]
 
   resource :profile, only: %i[show edit update destroy], controller: "profiles" do
     member do
       get :delete
+      get :bookings
     end
   end
 
@@ -24,6 +28,15 @@ Rails.application.routes.draw do
     resources :tags
     resources :authors
     resources :genres
+
+    resources :bookings, only: %i[index show] do
+      member do
+        patch :approve
+        patch :reject
+        patch :take
+        patch :return
+      end
+    end
 
     resources :users do
       member do

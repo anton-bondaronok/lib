@@ -1,0 +1,49 @@
+<div class="bg-white p-6 rounded-xl shadow">
+  <div class="flex gap-x-6 items-center mb-6">
+    <h1 class="font-bold text-4xl">Bookings</h1>
+  </div>
+
+  <%= form_with url: admin_bookings_path, method: :get, local: true, class: "mb-4" do |f| %>
+    <div class="flex gap-2">
+      <%= f.text_field :query, value: params[:query], placeholder: "Search bookings...", class: "w-full px-3 py-2 border rounded-md shadow-sm focus:ring focus:border-indigo-300" %>
+      <%= f.submit "Search", class: "px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700" %>
+    </div>
+  <% end %>
+
+  <table class="min-w-full table-auto border-gray-200 rounded-lg overflow-hidden shadow-sm">
+    <thead class="bg-gray-100 font-semibold text-gray-700">
+      <tr>
+        <th class="px-4 py-2 text-left">Book</th>
+        <th class="px-4 py-2 text-left">User Email</th>
+        <th class="px-4 py-2 text-left">User Name</th>
+        <th class="px-4 py-2 text-left">Status</th>
+        <th class="px-4 py-2 text-left">Created</th>
+        <th class="px-4 py-2"></th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-100 text-gray-800">
+      <% @bookings.each do |booking| %>
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-4">
+            <%= link_to booking.book.name, admin_book_path(booking.book), class: "text-indigo-600 hover:underline mr-2" %>
+          </td>
+          <td class="px-4 py-4">
+            <%= link_to booking.user.email, admin_user_path(booking.user), class: "text-indigo-600 hover:underline mr-2" %>
+          </td>
+          <td class="px-4 py-4">
+            <%= link_to booking.user.full_name, admin_user_path(booking.user), class: "text-indigo-600 hover:underline mr-2" %>
+          </td>
+          <td class="px-4 py-4">
+            <div class="mt-2 px-2 py-1 text-xs rounded-full font-semibold max-w-fit <%= booking_badge_color(booking.status) %>">
+              <%= booking.status.titleize %>
+            </div>
+          </td>
+          <td class="px-4 py-4"><%= l(booking.created_at, format: :long) %></td>
+          <td class="px-4 py-4 text-right">
+            <%= link_to "Show", admin_booking_path(booking), class: "text-indigo-600 hover:underline mr-2" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
