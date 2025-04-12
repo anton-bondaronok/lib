@@ -4,9 +4,9 @@ class RatingsController < ApplicationController
     @rating.assign_attributes(rating_params)
 
     if @rating.save
-      redirect_to book_path(@rating.book), notice: "Thank you for rating!"
+      redirect_to book_path(@rating.book), notice: "Спасибо за вашу оценка!"
     else
-      redirect_to book_path(@rating.book), alert: "Rating failed."
+      redirect_to book_path(@rating.book), alert: "Возникла ошибка."
     end
   end
 
@@ -15,9 +15,9 @@ class RatingsController < ApplicationController
     @rating.assign_attributes(rating_params)
 
     if @rating.save
-      redirect_to book_path(@rating.book), notice: "Thank you for rating!"
+      redirect_to book_path(@rating.book), notice: "Спасибо за вашу оценка!"
     else
-      redirect_to book_path(@rating.book), alert: "Rating failed."
+      redirect_to book_path(@rating.book), alert: "Возникла ошибка."
     end
   end
 

@@ -35,15 +35,32 @@ module BookingsHelper
   def booking_status_hint(status)
     case status
     when "pending"
-      "Waiting for librarian approval"
+      "Ожидает подтверждения библиотекарем"
     when "approved"
-      "You can now take the books"
+      "Вы можете забрать книги"
     when "taken"
-      "Books is in your hands — remember to return them"
+      "Книги у вас — не забудьте вернуть их вовремя"
     when "returned"
-      "You’ve successfully returned this books"
+      "Вы успешно вернули книги"
     when "rejected"
-      "Request was declined by librarian. Books cannot be taken"
+      "Запрос отклонён библиотекарем. Книги не могут быть выданы"
+    else
+      ""
+    end
+  end
+
+  def booking_status(status)
+    case status
+    when "pending"
+      "Ожидает подтверждения"
+    when "approved"
+      "Одобрено"
+    when "taken"
+      "Выдано"
+    when "returned"
+      "Возвращено"
+    when "rejected"
+      "Отклонено"
     else
       ""
     end

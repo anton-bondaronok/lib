@@ -1,22 +1,22 @@
 <div class="bg-white p-6 rounded-xl shadow">
   <div class="flex gap-x-6 items-center mb-6">
-    <h1 class="font-bold text-4xl">Authors</h1>
-    <%= link_to "New author", new_admin_author_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+    <h1 class="font-bold text-4xl">Авторы</h1>
+    <%= link_to "Новый автор", new_admin_author_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
   <%= form_with url: admin_authors_path, method: :get, local: true, class: "mb-4" do |f| %>
     <div class="flex gap-2">
-      <%= f.text_field :query, value: params[:query], placeholder: "Search authors...", class: "w-full px-3 py-2 border rounded-md shadow-sm focus:ring focus:border-indigo-300" %>
-      <%= f.submit "Search", class: "px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700" %>
+      <%= f.text_field :query, value: params[:query], placeholder: "Искать авторов...", class: "w-full px-3 py-2 border rounded-md shadow-sm focus:ring focus:border-indigo-300" %>
+      <%= f.submit "Поиск", class: "px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700" %>
     </div>
   <% end %>
 
   <table class="min-w-full table-auto border-gray-200 rounded-lg overflow-hidden shadow-sm">
     <thead class="bg-gray-100 font-semibold text-gray-700">
       <tr>
-        <th class="px-4 py-2 text-left">Avatar</th>
-        <th class="px-4 py-2 text-left">Full name</th>
-        <th class="px-4 py-2 text-left">Created</th>
+        <th class="px-4 py-2 text-left">Изображение</th>
+        <th class="px-4 py-2 text-left">Полное имя</th>
+        <th class="px-4 py-2 text-left">Создан</th>
         <th class="px-4 py-2 text-left"></th>
       </tr>
     </thead>
@@ -30,15 +30,15 @@
                   image: { class: "rounded shadow-md object-cover h-[80px] w-[50px]" }
                 )%>
             <% else %>
-              <span class="text-sm text-gray-400 italic">No image</span>
+              <span class="text-sm text-gray-400 italic">Нет изображения</span>
             <% end %>
           </td>
 
           <td class="px-6 py-4 font-medium text-gray-800"><%= author.full_name %></td>
           <td class="px-4 py-4 font-medium text-gray-800"><%= l(author.created_at, format: :long) %></td>
           <td class="px-4 py-4 text-right">
-            <%= link_to "Show", admin_author_path(author), class: "text-indigo-600 hover:underline mr-2" %>
-            <%= link_to "Edit", edit_admin_author_path(author), class: "text-indigo-600 hover:underline" %>
+            <%= link_to "Показать", admin_author_path(author), class: "text-indigo-600 hover:underline mr-2" %>
+            <%= link_to "Редактировать", edit_admin_author_path(author), class: "text-indigo-600 hover:underline" %>
           </td>
         </tr>
       </tr>

@@ -28,7 +28,7 @@ class Admin::GenresController < AdminController
     @genre = Genre.new(admin_genre_params)
 
     if @genre.save
-      redirect_to [ :admin, @genre ], notice: "Genre was successfully created."
+      redirect_to [ :admin, @genre ], notice: "Жанр был успешно создан."
     else
       render :new, status: :unprocessable_entity
     end
@@ -37,7 +37,7 @@ class Admin::GenresController < AdminController
   # PATCH/PUT /admin/genres/1 or /admin/genres/1.json
   def update
     if @genre.update(admin_genre_params)
-      redirect_to [ :admin, @genre ], notice: "Genre was successfully updated."
+      redirect_to [ :admin, @genre ], notice: "Жанр был успешно обновлен."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -47,7 +47,7 @@ class Admin::GenresController < AdminController
   def destroy
     @genre.destroy!
 
-    redirect_to admin_genres_path, status: :see_other, notice: "Genre was successfully destroyed."
+    redirect_to admin_genres_path, status: :see_other, notice: "Жанр был успешно удален."
   end
 
   private

@@ -11,7 +11,7 @@
       <% end %>
       <div class="">
         <h1 class="text-3xl font-bold text-gray-900 mb-2"><%= @book.name %></h1>
-        <p class="text-lg text-gray-600 mb-4">by 
+        <p class="text-lg text-gray-600 mb-4">
           <%= link_to @book.author.full_name, author_path(@book.author), data: { turbo_frame: "_top" },
               class: "text-sm text-indigo-600 hover:text-indigo-800 hover:underline" %>
         </p>
@@ -36,14 +36,14 @@
     </div>
 
     <div class="bg-gray-50 px-6 py-4 flex justify-between items-center">
-      <%= link_to "← Back to all books", root_path, class: "text-indigo-600 hover:underline font-medium" %>
+      <%= link_to "← Назад ко всем книгам", root_path, class: "text-indigo-600 hover:underline font-medium" %>
 
       <%= render "books/show/booking" %>
     </div>
 
     <% if @related_by_author.any? %>
       <%= link_to books_path(author_id: @book.author.id) do %>
-        <h2 class="text-xl font-semibold mt-10 mb-3 hover:underline">More by <%= @book.author.full_name %></h2>
+        <h2 class="text-xl font-semibold mt-10 mb-3 hover:underline">Больше от <%= @book.author.full_name %></h2>
       <% end %>
 
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -53,7 +53,7 @@
 
     <% if @related_by_genre.any? %>
       <%= link_to books_path(genre_id: @book.genre.id) do %>
-        <h2 class="text-xl font-semibold mt-10 mb-3 hover:underline">More in <%= @book.genre.name %></h2>
+        <h2 class="text-xl font-semibold mt-10 mb-3 hover:underline">Больше в жанре <%= @book.genre.name %></h2>
       <% end %>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <%= render partial: "books/book_card", collection: @related_by_genre, as: :book %>

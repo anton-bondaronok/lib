@@ -27,7 +27,7 @@
 
     <div>
       <%= link_to books_path(author_id: @author.id) do %>
-        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Books by <%= @author.full_name %></h2>
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Книги от <%= @author.full_name %></h2>
       <% end %>
 
       <% if @author.books.any? %>
@@ -35,7 +35,7 @@
           <%= render partial: "books/book_card", collection: @author.books, as: :book %>
         </div>
       <% else %>
-        <p class="text-gray-500">This author hasn't published any books yet.</p>
+        <p class="text-gray-500">Этот пользователь еще не опубликовал ни одной книги.</p>
       <% end %>
     </div>
   </div>

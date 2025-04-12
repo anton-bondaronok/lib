@@ -19,33 +19,33 @@ class Admin::BookingsController < AdminController
 
   def approve
     if @booking.pending? && @booking.update(status: "approved")
-      redirect_to admin_booking_path(@booking), notice: "Booking approved."
+      redirect_to admin_booking_path(@booking), notice: "Бронирование подтверждено."
     else
-      redirect_to admin_booking_path(@booking), alert: "Booking cannot be approved."
+      redirect_to admin_booking_path(@booking), alert: "Бронирование не может быть подтверждено."
     end
   end
 
   def take
     if @booking.approved? && @booking.update(status: "taken")
-      redirect_to admin_booking_path(@booking), notice: "Booking taken."
+      redirect_to admin_booking_path(@booking), notice: "Книга выдана."
     else
-      redirect_to admin_booking_path(@booking), alert: "Booking cannot be taken."
+      redirect_to admin_booking_path(@booking), alert: "Книга не может быть выдана."
     end
   end
 
   def reject
-    if @booking.pending? && @booking.update(status: "rejected")
-      redirect_to admin_booking_path(@booking), notice: "Booking rejected."
+    if (@booking.pending? || @booking.rejected?) && @booking.update(status: "rejected")
+      redirect_to admin_booking_path(@booking), notice: "Бронирование отклонено."
     else
-      redirect_to admin_booking_path(@booking), alert: "Booking cannot be rejected."
+      redirect_to admin_booking_path(@booking), alert: "Бронирование не может быть отклонено."
     end
   end
 
   def return
     if @booking.taken? && @booking.update(status: "returned")
-      redirect_to admin_booking_path(@booking), notice: "Booking returned."
+      redirect_to admin_booking_path(@booking), notice: "Книга возвращена."
     else
-      redirect_to admin_booking_path(@booking), alert: "Booking cannot be returned."
+      redirect_to admin_booking_path(@booking), alert: "Бронирование не может быть возвращена."
     end
   end
 

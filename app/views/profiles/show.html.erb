@@ -16,7 +16,7 @@
 
         <div class="space-y-4 text-gray-700">
           <div class="flex justify-between">
-            <span class="font-medium">Full Name:</span>
+            <span class="font-medium">ФИО:</span>
             <span><%= current_user.full_name %></span>
           </div>
 
@@ -26,13 +26,13 @@
           </div>
 
           <div class="flex justify-between">
-            <span class="font-medium">Account Created:</span>
+            <span class="font-medium">Учетная запись создана:</span>
             <span><%= l(current_user.created_at, format: :long) %></span>
           </div>
 
           <% if current_user.confirmed? %>
             <div class="flex justify-between">
-              <span class="font-medium">Account Confirmed:</span>
+              <span class="font-medium">Учетная запись подтверждена:</span>
               <span><%= l(current_user.confirmed_at, format: :long) %></span>
             </div>
           <% end %>

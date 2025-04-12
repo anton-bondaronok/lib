@@ -1,0 +1,78 @@
+ru:
+  activerecord:
+    models:
+      author: "Автор"
+      book: "Книга"
+      genre: "Жанр"
+      tag: "Тег"
+      user: "Пользователь"
+      comment: "Комментарий"
+      rating: "Оценка"
+      booking: "Бронирование"
+      book_tag: "Связь книги и тега"
+    attributes:
+      author:
+        avatar: "Изображение"
+        full_name: "Полное имя"
+        short_bio: "Краткая биография"
+        created_at: "Создано"
+        updated_at: "Обновлено"
+      book:
+        name: "Название"
+        description: "Описание"
+        book_tags: "Теги книги"
+        avatar: "Изображение"
+        genre_id: "Жанр"
+        genre: "Жанр"
+        author_id: "Автор"
+        author: "Автор"
+        created_at: "Создано"
+        updated_at: "Обновлено"
+      genre:
+        name: "Название"
+        created_at: "Создано"
+        updated_at: "Обновлено"
+      tag:
+        name: "Название"
+        created_at: "Создано"
+        updated_at: "Обновлено"
+      user:
+        email: "Адрес электронной почты"
+        encrypted_password: "Зашифрованный пароль"
+        remember_created_at: "Дата запоминания"
+        confirmed_at: "Подтверждено"
+        locked_at: "Заблокировано"
+        role: "Роль"
+        full_name: "Полное имя"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+        created_at: "Создано"
+        updated_at: "Обновлено"
+      comment:
+        user_id: "Пользователь"
+        book_id: "Книга"
+        content: "Содержание"
+        created_at: "Создано"
+        updated_at: "Обновлено"
+      rating:
+        user_id: "Пользователь"
+        book_id: "Книга"
+        value: "Значение"
+        created_at: "Создано"
+        updated_at: "Обновлено"
+      booking:
+        user_id: "Пользователь"
+        book_id: "Книга"
+        status: "Статус"
+        taken_at: "Дата взятия"
+        returned_at: "Дата возврата"
+        created_at: "Создано"
+        updated_at: "Обновлено"
+      book_tag:
+        book_id: "Книга"
+        tag_id: "Тег"
+        created_at: "Создано"
+        updated_at: "Обновлено"
+    errors:
+      messages:
+        required: "не должне быть пустым"

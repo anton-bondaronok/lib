@@ -1,10 +1,10 @@
 <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
   <div class="flex justify-between">
-    <h1 class="text-2xl font-semibold text-gray-800 mb-4">Edit Genre</h1>
+    <h1 class="text-2xl font-semibold text-gray-800 mb-4">Редактирование жанра</h1>
   </div>
 
   <%= render "form", genre: @genre %>
 
-  <%= link_to "Show this genre", [:admin, @genre], class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to genres", admin_genres_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <%= link_to "Показать жанр", [:admin, @genre], class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <%= link_to "Назад к жанрам", admin_genres_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
 </div>

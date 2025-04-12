@@ -6,7 +6,7 @@ export default class extends Controller {
   toggle() {
     this.advancedTarget.classList.toggle("hidden")
     this.toggleTextTarget.textContent =
-      this.advancedTarget.classList.contains("hidden") ? "More filters" : "Less filters"
+      this.advancedTarget.classList.contains("hidden") ? "Больше фильтров" : "Меньше фильтров"
 
     this.iconDownTarget.classList.toggle("hidden")
     this.iconUpTarget.classList.toggle("hidden")

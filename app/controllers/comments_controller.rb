@@ -7,9 +7,9 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to book_path(@book), notice: "Comment added successfully."
+      redirect_to book_path(@book), notice: "Комментарий успешно добавлен."
     else
-      redirect_to book_path(@book), alert: "There was an error adding your comment."
+      redirect_to book_path(@book), alert: "Возникла ошибка при добавлении комментария."
     end
   end
 
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.destroy
 
-    redirect_to book_path(@book), notice: "Comment removed successfully."
+    redirect_to book_path(@book), notice: "Комментарий успешно удален."
   end
 
   private

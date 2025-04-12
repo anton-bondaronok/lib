@@ -22,28 +22,28 @@
     <header class="bg-white shadow">
       <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <%= link_to root_path do %>
-          <h1 class="text-xl font-bold text-indigo-600">📚 Library</h1>
+          <h1 class="text-xl font-bold text-indigo-600">📚</h1>
         <% end %>
 
         <% if user_signed_in? %>
           <div class="flex items-center space-x-4">
 
             <% if current_user.super_admin? || current_user.librarian? %>
-              <%= link_to "Bookigs", admin_bookings_path, class: "text-sm text-indigo-600 hover:underline" %>
-              <%= link_to "Users", admin_users_path, class: "text-sm text-indigo-600 hover:underline" %>
-              <%= link_to "Books", admin_books_path, class: "text-sm text-indigo-600 hover:underline" %>
-              <%= link_to "Authors", admin_authors_path, class: "text-sm text-indigo-600 hover:underline" %>
-              <%= link_to "Genres", admin_genres_path, class: "text-sm text-indigo-600 hover:underline" %>
-              <%= link_to "Tags", admin_tags_path, class: "text-sm text-indigo-600 hover:underline" %>
+              <%= link_to "Бронирования", admin_bookings_path, class: "text-sm text-indigo-600 hover:underline" %>
+              <%= link_to "Пользователи", admin_users_path, class: "text-sm text-indigo-600 hover:underline" %>
+              <%= link_to "Книги", admin_books_path, class: "text-sm text-indigo-600 hover:underline" %>
+              <%= link_to "Авторы", admin_authors_path, class: "text-sm text-indigo-600 hover:underline" %>
+              <%= link_to "Жанры", admin_genres_path, class: "text-sm text-indigo-600 hover:underline" %>
+              <%= link_to "Теги", admin_tags_path, class: "text-sm text-indigo-600 hover:underline" %>
             <% else %>
-              <%= link_to "My books", bookings_profile_path, class: "text-sm text-indigo-600 hover:underline" %>
-              <%= link_to "Profile", profile_path, class: "text-sm text-indigo-600 hover:underline" %>
+              <%= link_to "Мои книги", bookings_profile_path, class: "text-sm text-indigo-600 hover:underline" %>
+              <%= link_to "Профиль", profile_path, class: "text-sm text-indigo-600 hover:underline" %>
             <% end %>
 
-            <%= button_to "Logout", destroy_user_session_path, method: :delete, data: { turbo: false }, class: "text-sm text-red-600 hover:underline" %>
+            <%= button_to "Выйти", destroy_user_session_path, method: :delete, data: { turbo: false }, class: "text-sm text-red-600 hover:underline" %>
           </div>
         <% else %>
-          <%= link_to "Login", new_user_session_path, class: "text-sm text-indigo-600 hover:underline" %>
+          <%= link_to "Войти", new_user_session_path, class: "text-sm text-indigo-600 hover:underline" %>
         <% end %>
       </div>
     </header>

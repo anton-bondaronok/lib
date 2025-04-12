@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
     @booking.status = :pending
 
     if @booking.save
-      redirect_to @book, notice: "Booking request sent!"
+      redirect_to @book, notice: "Запрос был успешно отправлен!"
     else
       redirect_to @book, alert: @booking.errors.full_messages.to_sentence
     end

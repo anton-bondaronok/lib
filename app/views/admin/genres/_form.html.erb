@@ -1,7 +1,7 @@
 <%= form_with(model: [:admin, genre], class: "contents") do |form| %>
   <% if genre.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
-      <h2><%= pluralize(genre.errors.count, "error") %> prohibited this genre from being saved:</h2>
+      <h2>Возникли ошибки:</h2>
 
       <ul class="list-disc ml-6">
         <% genre.errors.each do |error| %>

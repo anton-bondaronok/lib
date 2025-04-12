@@ -17,7 +17,7 @@ class Admin::UsersController < AdminController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to admin_user_path(@user), notice: "User created"
+      redirect_to admin_user_path(@user), notice: "Пользователь был успешно создан"
     else
       render :edit
     end
@@ -28,7 +28,7 @@ class Admin::UsersController < AdminController
 
   def update
     if @user.update(user_params)
-      redirect_to admin_user_path(@user), notice: "User updated"
+      redirect_to admin_user_path(@user), notice: "Пользователь был успешно обновлен"
     else
       render :edit
     end
@@ -36,22 +36,22 @@ class Admin::UsersController < AdminController
 
   def destroy
     @user.destroy
-    redirect_to admin_users_path, notice: "User deleted"
+    redirect_to admin_users_path, notice: "Пользователь был успешно удален"
   end
 
   def confirm
     @user.touch(:confirmed_at)
-    redirect_to admin_user_path(@user), notice: "User confirmed"
+    redirect_to admin_user_path(@user), notice: "Пользователь был успешно подтвержден"
   end
 
   def lock
     @user.touch(:locked_at)
-    redirect_to admin_user_path(@user), notice: "User locked"
+    redirect_to admin_user_path(@user), notice: "Пользователь был успешно заблокирован"
   end
 
   def unlock
     @user.update(locked_at: nil)
-    redirect_to admin_user_path(@user), notice: "User unlocked"
+    redirect_to admin_user_path(@user), notice: "Пользователь был успешно разблокирован"
   end
 
   private

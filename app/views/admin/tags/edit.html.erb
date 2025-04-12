@@ -1,10 +1,10 @@
 <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
   <div class="flex justify-between">
-    <h1 class="text-2xl font-semibold text-gray-800 mb-4">Edit Tag</h1>
+    <h1 class="text-2xl font-semibold text-gray-800 mb-4">Редактировать тег</h1>
   </div>
 
   <%= render "form", tag: @tag %>
 
-  <%= link_to "Show this tag", [:admin, @tag], class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to tags", admin_tags_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <%= link_to "Показать тег", [:admin, @tag], class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <%= link_to "Назад к тегам", admin_tags_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
 </div>

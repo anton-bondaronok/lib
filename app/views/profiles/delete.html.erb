@@ -7,10 +7,10 @@
       <!-- Main Profile Content -->
       <div class="flex-1">
         <div class="max-w-xl mx-auto bg-white ">
-          <h3 class="text-xl font-semibold text-gray-800 mb-4">Delete my account</h3>
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Удалить мой профиль</h3>
 
           <div class=" text-gray-600">
-            Unhappy? <%= button_to "Delete my account", profile_path, data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "text-red-600 hover:underline" %>
+            <%= button_to "Удалить мой профиль", profile_path, data: { confirm: "Вы уверены? Это действие необратимо.", turbo_confirm: "Вы уверены? Это действие необратимо." }, method: :delete, class: "text-red-600 hover:underline" %>
           </div>
         </div>
       </div>

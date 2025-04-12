@@ -1,7 +1,7 @@
-<% content_for :title, "Showing book" %>
+<% content_for :title, "Книга" %>
 
 <div class="md:w-2/3 w-full">
-  <h1 class="text-2xl font-semibold text-gray-800 mb-6">Book Details</h1>
+  <h1 class="text-2xl font-semibold text-gray-800 mb-6">Книга</h1>
 
   <div class="pb-4">
     <% if @book.avatar.attached? %>
@@ -20,22 +20,22 @@
     <%= render "books/show/rating" %>
 
     <div>
-      <span class="font-medium block mb-1">Description:</span>
+      <span class="font-medium block mb-1">Описание:</span>
       <p class="text-gray-600"><%= simple_format(@book.description) %></p>
     </div>
 
     <div>
-      <span class="font-medium block mb-1">Author:</span>
+      <span class="font-medium block mb-1">Автор:</span>
       <%= link_to @book.author.full_name, admin_author_path(@book.author), class: "text-indigo-600 hover:underline" %>
     </div>
 
     <div>
-      <span class="font-medium block mb-1">Genre:</span>
+      <span class="font-medium block mb-1">Жанр:</span>
       <%= link_to @book.genre.name, admin_genre_path(@book.genre), class: "text-indigo-600 hover:underline" %>
     </div>
 
     <div>
-      <span class="font-medium block mb-1">Tags:</span>
+      <span class="font-medium block mb-1">Теги:</span>
       <% @book.tags.each do |tag| %>
         <%= render "tags/tag", tag: tag %>
       <% end %>
@@ -43,10 +43,10 @@
 
   </div>
 
-  <%= link_to "Edit this book", edit_admin_book_path(@book), class: "mt-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to books", admin_books_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <%= link_to "Редактировать книгу", edit_admin_book_path(@book), class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  <%= link_to "Назад к книгам", admin_books_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
   <div class="inline-block ml-2">
-    <%= button_to "Destroy this book", [:admin, @book], method: :delete, class: "mt-2 rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium" %>
+    <%= button_to "Удалить книгу", [:admin, @book], method: :delete, class: "mt-2 rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium" %>
   </div>
 
   <%= render "books/show/comments" %>
